@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  div.contentWrapper
+    form(method="POST"
+  	  action="/signup"
+  	  enctype="application/x-www-form-urlencoded")
+      div.pad-left.pad-right.grey.margin-bottom
+        h3 Username:
+        input.input-block-level(type="text"
+    	  name="username"
+    	  id="username"
+    	  placeholder="Username...")
+      div.pad-left.pad-right.pad-bottom.grey.margin-bottom
+        h3 Password:
+        input.input-block-level(type="password"
+    	  name="password"
+    	  id="password")
+      div
+        input.btn(type="submit"
+    	  name="submit"
+    	  id="submit"
+    	  value="Save")

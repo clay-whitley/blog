@@ -1,0 +1,121 @@
+body {
+  
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#header {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: auto;
+	margin: 0 auto;
+	clear: both;
+	height: 75px;
+	border-bottom: 1px solid #e8e8e8;
+	background-image: url(/images/wild_oliva.png);
+	z-index: 10;
+	color: #ffffff;
+}
+
+#headertitle {
+	margin-left: 30px;
+}
+
+#sidebar {
+	position: fixed;
+	left: 0;
+	top: 76px;
+	bottom: 0;
+	width: 27%;
+	right: auto;
+	z-index: 1;
+	border-right: 1px solid #e8e8e8;
+	background-image: url(/images/honey_im_subtle.png);
+}
+
+#content {
+	margin-left: 28%;
+	margin-top: 76px;
+	display: block;
+	position: relative;
+	background-color: #fff;
+	z-index: 2;
+	
+}
+
+#footer {
+	width: 1060px;
+	margin: 0 auto;
+	border: 1px solid red;
+}
+
+.indexentry {
+	height: 200px;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 15px;
+}
+
+/*Utility classes*/
+
+.grey {
+	background-color: #e8e8e8;
+	border-radius: 10px;
+}
+
+.pad {
+	padding:15px;
+}
+
+.pad-left {
+	padding-left: 15px;
+}
+
+.pad-right {
+	padding-right: 15px;
+}
+
+.pad-bottom {
+	padding-bottom: 15px;
+}
+
+.pad-top {
+	padding-top: 15px;
+}
+
+.margin-bottom {
+	margin-bottom:15px;
+}
+
+/*End Utility classes*/
+.contentWrapper {
+	max-width: 800px;
+	margin-left: 15px;
+	padding-top: 20px;
+}
+
+.texttitle {
+	height: 35px;
+	font-size: 25px;
+	
+
+}
+
+.postpreview {
+	width: 600px;
+}
+
+.textbody {
+	width: 770px;
+	height: 200px;
+}
+
+.sidebarnav {
+	position: absolute;
+	bottom:15px;
+	width: 80%;
+	margin-left: 10%;
+}
+

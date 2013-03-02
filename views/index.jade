@@ -1,0 +1,27 @@
+extends layout
+
+block header
+  header#header
+    h1.pull-left#headertitle #{title}
+    div.pad-right.pad-top.pull-right.dropdown(style="margin-right:50px;")
+      a.dropdown-toggle(href="#",data-toggle="dropdown")
+        img.img-rounded(src="http://placehold.it/50x50")
+      ul.dropdown-menu(role="menu")
+        li
+          a(href="/logout") Logout
+        if cats.length
+          each cat in cats
+            li
+              a(href="/blog/category/#{cat.name}") #{cat.name}
+
+block content
+  if docs.length
+    each doc in docs
+      div.indexentry
+        div.postpreview.pull-left
+          h1 #{doc.title}
+          h4!= doc.desc
+          a.btn.btn-primary(href="/blog/#{doc.sn}") View
+        div.pull-left
+          img.img-rounded(src="http://placehold.it/150x150")
+  a.btn.btn-success(href="/blog/add") Add Blog Post

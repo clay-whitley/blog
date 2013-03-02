@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div.contentWrapper
+    div.page-header
+      h1 #{post.title}
+        small #{post.sn}
+    div!= post.body
+    br
+    a.btn.btn-inverse(href="/blog/#{post.sn}/edit") Edit

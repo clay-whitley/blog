@@ -1,0 +1,55 @@
+extends layout
+
+block append head
+  script(src="/javascripts/tiny_mce/tiny_mce.js")
+  script
+    tinyMCE.init({
+        mode : "textareas",
+        theme : "advanced",
+
+        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect"
+    });
+
+block content
+  div.contentWrapper
+    form(method="POST"
+  	  action="/blog/add"
+  	  enctype="application/x-www-form-urlencoded")
+      div.pad-left.pad-right.grey.margin-bottom
+        h1 Title
+        input.input-block-level(type="text"
+    	  name="posttitle"
+    	  id="posttitle"
+    	  placeholder="Title..."
+    	  cols="1"
+    	  rows="1")
+      div.pad-left.pad-right.grey.margin-bottom
+        h3 Category
+        div.controls.controls-row
+          input.span3(type="text"
+    	    name="postcategory"
+    	    id="postcategory"
+    	    placeholder="Category..."
+    	    cols="1"
+    	    rows="1")
+          select.span2(name="postcatchoice")
+            option(value="")
+            each cat in cats
+              option(value="#{cat.name}") #{cat.name}
+      div.pad-left.pad-right.pad-bottom.grey.margin-bottom
+        h3 Description
+        textarea.input-block-level(type="text"
+    	  name="postdesc"
+    	  id="postdesc"
+    	  rows="3")
+      div.pad-left.pad-right.pad-bottom.grey.margin-bottom
+        h3 Body
+        textarea.input-block-level(type="text"
+    	  name="postbody"
+    	  id="postbody"
+    	  rows="7")
+      div
+        input.btn(type="submit"
+    	  name="submit"
+    	  id="submit"
+    	  value="Save")

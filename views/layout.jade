@@ -1,0 +1,33 @@
+doctype 5
+html
+  head
+    block head
+      title= title
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+      script(src="http://code.jquery.com/jquery.js")
+      script(src='/javascripts/bootstrap.js')
+  body
+    block header
+      header#header
+        h1.pull-left#headertitle #{title}
+        div.pad-right.pad-top.pull-right.dropdown(style="margin-right:50px;")
+          a.dropdown-toggle(href="#",data-toggle="dropdown")
+            img.img-rounded(src="http://placehold.it/50x50")
+          ul.dropdown-menu(role="menu")
+            li
+              a(href="/logout") Logout
+    section#sidebar
+      div.pad
+        img.img-rounded(src="http://placehold.it/275x275")
+      div.sidebarnav
+        ul.nav.nav-pills.nav-stacked
+          li
+            a(href="/signup") Register
+          li.active
+            a(href="/") Blog
+          li
+            a(href="/login") Login
+    section#content
+      block content
+    
