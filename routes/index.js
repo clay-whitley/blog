@@ -111,7 +111,7 @@ exports.addpost = function(req, res){
 								}
 							});
 						} else {
-							console.log('trip');
+							console.log('tripp');
 							res.redirect('/');
 						}
 					});
