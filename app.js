@@ -56,7 +56,7 @@ app.put('/blog/:sn/update', routes.updatepost);
 app.get('/:test', routes.test);
 app.get('/users', user.list);
 
-mongoose.connect('mongodb://localhost/blog');
+mongoose.connect('mongodb://nodejitsu:3f4438d6db932e50601c166c66c56c82@alex.mongohq.com:10057/nodejitsudb352398295620');
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
