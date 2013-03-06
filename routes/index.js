@@ -1,6 +1,8 @@
 var Post = require('../models/post.js');
 var User = require('../models/user.js');
 var Category = require('../models/category.js');
+var Album = require('../models/album.js');
+var Photo = require('../models/photo.js');
 /*
  * GET home page.
  */
@@ -121,23 +123,6 @@ exports.addpost = function(req, res){
 		
 
 	});
-	
-	
-	// var post = {
-	// 	sn: sn
-	// 	, title: req.body.posttitle
-	// 	, body: req.body.postbody
-	// };
-	// var postObj = new Post(post);
-	// postObj.save(function(err, data) {
-	// 	if (err) {
-	// 		res.send(err);
-	// 	} else {
-	// 		console.log(data);
-	// 		res.render('confirmpost', {title: 'Confirm', post: post});
-	// 	}
-	// });
-	
 };
 
 exports.viewpost = function(req, res){
@@ -196,6 +181,37 @@ exports.updatepost = function(req, res){
 		} else {
 			res.redirect('/');
 		}
+	});
+};
+
+exports.viewalbums = function(req, res){
+	Album.find({}, function(err, albums){
+		if (err) res.send(err);
+		res.render('viewalbums', {title: 'Albums', albums: albums});
+	});
+};
+
+exports.addalbumform = function(req, res){
+	res.render('addalbumform', {title: 'Add Album'});
+};
+
+exports.addalbum = function(req, res){
+	var album = {
+		name: req.body.albumname,
+		thumbnail: req.body.albumthumbnail
+	};
+	Album.create(album, function(err,album){
+		if (err) res.send(err);
+		console.log(album);
+		res.redirect('/gallery/albums');
+	});
+};
+
+exports.viewalbum = function(req, res){
+	Album.findOne({_id: req.params.id}, function(err,album){
+		if (err) res.send(err);
+		console.log(album);
+		res.render('viewalbum', {title: album.name});
 	});
 };
 

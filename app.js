@@ -53,6 +53,10 @@ app.get('/blog/:sn', routes.viewpost);
 app.get('/blog/category/:cat', routes.viewcat);
 app.get('/blog/:sn/edit', secure, routes.updateform);
 app.put('/blog/:sn/update', routes.updatepost);
+app.get('/gallery/albums', routes.viewalbums);
+app.get('/gallery/albums/add', routes.addalbumform);
+app.post('/gallery/albums/add', routes.addalbum);
+app.get('/gallery/albums/:id', routes.viewalbum);
 app.get('/:test', routes.test);
 app.get('/users', user.list);
 

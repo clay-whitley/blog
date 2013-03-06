@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div.contentWrapper
+    ul.thumbnails
+      each album in albums
+        li.span4
+          div.thumbnail
+            a.thumbnail(href="/gallery/albums/#{album.id}")
+              img(src="#{album.thumbnail}")
+            h3 #{album.name}
+    a.btn.btn-success(href="/gallery/albums/add") Add Album
