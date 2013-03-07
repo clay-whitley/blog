@@ -2,7 +2,31 @@ extends layout
 
 block content
   div.contentWrapper
-    each photo in photos
-      div.pad-left.pad-right.grey.margin-bottom
-        img(src="#{photo.file}")
+    div#myCarousel.carousel.slide(data-interval="false")
+      ol.carousel-indicators
+        li.active(data-target="#myCarousel", data-slide-to="0")
+        li.active(data-target="#myCarousel", data-slide-to="1")
+        li.active(data-target="#myCarousel", data-slide-to="2")
+        each photo, i in photos
+          li.active(data-target="#myCarousel", data-slide-to="#{i + 3}")
+      div.carousel-inner
+        div.active.item
+          img(src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg")
+          div.carousel-caption
+            p Test Text
+        div.item
+          img(src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg")
+          div.carousel-caption
+            p Test Text
+        div.item
+          img(src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg")
+          div.carousel-caption
+            p Test Text
+        each photo, i in photos
+          div.item
+            img(src="#{photo.file}")
+            div.carousel-caption
+              p #{photo.name}
+      a.carousel-control.left(href="#myCarousel", data-slide="prev") &lsaquo;
+      a.carousel-control.right(href="#myCarousel", data-slide="next") &rsaquo;
     a.btn(href="/gallery/#{album.id}/add") Add Photo
