@@ -211,7 +211,31 @@ exports.viewalbum = function(req, res){
 	Album.findOne({_id: req.params.id}, function(err,album){
 		if (err) res.send(err);
 		console.log(album);
-		res.render('viewalbum', {title: album.name});
+		Photo.find({album: album.id}, function(err,photos){
+			if (err) res.send(err);
+			console.log(photos);
+			res.render('viewalbum', {title: album.name, album: album, photos: photos});
+		});
+		
 	});
 };
 
+exports.addphotoform = function(req, res){
+	Album.findOne({_id: req.params.id}, function(err,album){
+		if (err) res.send(err);
+		res.render('addphotoform', {title: "Add Photo", album: album});
+	});
+};
+
+exports.addphoto = function(req, res){
+	var photo = {
+		name: req.body.photoname,
+		file: req.body.photofile,
+		album: req.body.photoalbum
+	};
+	Photo.create(photo, function(err,photo){
+		if (err) res.send(err);
+		console.log(photo);
+		res.redirect('/gallery/albums/' + req.body.photoalbum);
+	});
+};

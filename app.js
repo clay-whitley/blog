@@ -57,6 +57,8 @@ app.get('/gallery/albums', routes.viewalbums);
 app.get('/gallery/albums/add', routes.addalbumform);
 app.post('/gallery/albums/add', routes.addalbum);
 app.get('/gallery/albums/:id', routes.viewalbum);
+app.get('/gallery/:id/add', routes.addphotoform);
+app.post('/gallery/images/add', routes.addphoto);
 app.get('/:test', routes.test);
 app.get('/users', user.list);
 

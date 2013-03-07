@@ -5,7 +5,8 @@ var ObjectId = Schema.ObjectId;
 
 var Photo = new Schema({
 	name : String,
-	file: String
+	file: String,
+	album: String
 });
 
 module.exports = mongoose.model('Photo', Photo);

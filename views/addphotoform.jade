@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.contentWrapper
+    form(method="POST"
+    	action="/gallery/images/add"
+    	enctype="application/x-www-form-urlencoded")
+      div.pad-left.pad-right.grey.margin-bottom
+        h3 Name
+        input.large(type="text"
+        	name="photoname"
+        	id="photoname")
+      div.pad-left.pad-right.grey.margin-bottom
+        h3 File Path
+        input.xlarge(type="text"
+        	name="photofile"
+        	id="photofile")
+      input(type="hidden"
+        name="photoalbum"
+        id="photoalbum"
+        value="#{album.id}")
+      input.btn(type="submit"
+      	name="submit"
+      	id="submit"
+      	value="Submit")

@@ -2,4 +2,7 @@ extends layout
 
 block content
   div.contentWrapper
-    a.btn(href="#") Add Photo
+    each photo in photos
+      div.pad-left.pad-right.grey.margin-bottom
+        img(src="#{photo.file}")
+    a.btn(href="/gallery/#{album.id}/add") Add Photo
