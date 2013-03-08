@@ -5984,14 +5984,20 @@ a.badge:focus {
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-  display: block;
+  display: inline-block;
   line-height: 1;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .carousel-inner > .active,
 .carousel-inner > .next,
 .carousel-inner > .prev {
   display: block;
+  min-height: 460px;
+  max-height: 460px;
+  text-align: center;
+  line-height: 460px;
 }
 
 .carousel-inner > .active {

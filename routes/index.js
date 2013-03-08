@@ -3,6 +3,8 @@ var User = require('../models/user.js');
 var Category = require('../models/category.js');
 var Album = require('../models/album.js');
 var Photo = require('../models/photo.js');
+
+var fs = require('fs');
 /*
  * GET home page.
  */
@@ -228,14 +230,29 @@ exports.addphotoform = function(req, res){
 };
 
 exports.addphoto = function(req, res){
-	var photo = {
-		name: req.body.photoname,
-		file: req.body.photofile,
-		album: req.body.photoalbum
-	};
-	Photo.create(photo, function(err,photo){
+	var tmp_path = req.files.photofile.path;
+	var target_path = __dirname + '/../public/uploads/' + req.files.photofile.name;
+	console.log(req.files);
+	fs.readFile(tmp_path, function(err, data){
 		if (err) res.send(err);
-		console.log(photo);
-		res.redirect('/gallery/albums/' + req.body.photoalbum);
+		console.log(data);
+		fs.writeFile(target_path, data, function(err){
+			if (err) res.send(err);
+			console.log(target_path);
+			var photo = {
+				name: req.body.photoname,
+				file: '/uploads/' + req.files.photofile.name,
+				album: req.body.photoalbum
+			};
+			fs.unlink(tmp_path, function(){
+				if (err) res.send(err);
+				console.log('successfully unlinked');
+			});
+			Photo.create(photo, function(err,photo){
+				if (err) res.send(err);
+				console.log(photo);
+				res.redirect('/gallery/albums/' + req.body.photoalbum);
+			});
+		});
 	});
 };

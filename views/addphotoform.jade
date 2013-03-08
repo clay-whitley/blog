@@ -4,7 +4,7 @@ block content
   div.contentWrapper
     form(method="POST"
     	action="/gallery/images/add"
-    	enctype="application/x-www-form-urlencoded")
+    	enctype="multipart/form-data")
       div.pad-left.pad-right.grey.margin-bottom
         h3 Name
         input.large(type="text"
@@ -12,7 +12,7 @@ block content
         	id="photoname")
       div.pad-left.pad-right.grey.margin-bottom
         h3 File Path
-        input.xlarge(type="text"
+        input.xlarge(type="file"
         	name="photofile"
         	id="photofile")
       input(type="hidden"
