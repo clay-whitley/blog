@@ -5998,6 +5998,7 @@ a.badge:focus {
   max-height: 460px;
   text-align: center;
   line-height: 460px;
+  background-color: black;
 }
 
 .carousel-inner > .active {
