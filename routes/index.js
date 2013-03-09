@@ -3,6 +3,7 @@ var User = require('../models/user.js');
 var Category = require('../models/category.js');
 var Album = require('../models/album.js');
 var Photo = require('../models/photo.js');
+var Page = require('../models/page.js');
 
 var fs = require('fs');
 /*
@@ -22,7 +23,9 @@ exports.index = function(req, res){
 				if (err) {
 					res.send(err);
 				} else {
-					res.render('index', {title: 'Index', docs: docs, cats: cats});
+					Page.find({nav: "true"}, function(err,pages){
+						res.render('index', {title: 'Index', docs: docs, cats: cats, pages: pages});
+					});
 				}
 			});
 			
@@ -67,11 +70,11 @@ exports.logout = function(req, res){
 };
 
 exports.loginform = function(req, res){
-	res.render('login', {title: 'Login'});
+	res.render('login', {title: 'Login', pages: ''});
 };
 
 exports.registerform = function(req, res){
-	res.render('register', {title: 'Register'});
+	res.render('register', {title: 'Register', pages: ''});
 };
 
 exports.test = function(req, res){
@@ -81,7 +84,7 @@ exports.test = function(req, res){
 exports.postform = function(req, res){
 	Category.find({}, function(err, cats){
 		if (err) res.send(err);
-		res.render('postform', {title: 'Form', cats: cats});
+		res.render('postform', {title: 'Form', cats: cats, pages: ''});
 	});
 };
 
@@ -133,7 +136,7 @@ exports.viewpost = function(req, res){
 		if (err) {
 			res.send(err);
 		} else {
-			res.render('viewpost', {title: 'View', post: doc});
+			res.render('viewpost', {title: 'View', post: doc, pages: ''});
 		}
 	});
 	
@@ -147,7 +150,7 @@ exports.viewcat = function(req, res){
 			console.log(docs);
 			Category.find({}, function(err, cats){
 				if (err) res.send(err);
-				res.render('index', {title: req.params.cat, docs: docs, cats: cats});
+				res.render('index', {title: req.params.cat, docs: docs, cats: cats, pages: ''});
 			});
 			
 		}
@@ -162,7 +165,7 @@ exports.updateform = function(req, res){
 		} else {
 			Category.find({}, function(err,cats){
 				if (err) res.send(err);
-				res.render('updateform', {title: 'Update', post: doc, cats: cats});
+				res.render('updateform', {title: 'Update', post: doc, cats: cats, pages: ''});
 			});
 		}
 	});
@@ -189,12 +192,12 @@ exports.updatepost = function(req, res){
 exports.viewalbums = function(req, res){
 	Album.find({}, function(err, albums){
 		if (err) res.send(err);
-		res.render('viewalbums', {title: 'Albums', albums: albums});
+		res.render('viewalbums', {title: 'Albums', albums: albums, pages: ''});
 	});
 };
 
 exports.addalbumform = function(req, res){
-	res.render('addalbumform', {title: 'Add Album'});
+	res.render('addalbumform', {title: 'Add Album', pages: ''});
 };
 
 exports.addalbum = function(req, res){
@@ -216,7 +219,7 @@ exports.viewalbum = function(req, res){
 		Photo.find({album: album.id}, function(err,photos){
 			if (err) res.send(err);
 			console.log(photos);
-			res.render('viewalbum', {title: album.name, album: album, photos: photos});
+			res.render('viewalbum', {title: album.name, album: album, photos: photos, pages: ''});
 		});
 		
 	});
@@ -225,7 +228,7 @@ exports.viewalbum = function(req, res){
 exports.addphotoform = function(req, res){
 	Album.findOne({_id: req.params.id}, function(err,album){
 		if (err) res.send(err);
-		res.render('addphotoform', {title: "Add Photo", album: album});
+		res.render('addphotoform', {title: "Add Photo", album: album, pages: ''});
 	});
 };
 
@@ -254,5 +257,22 @@ exports.addphoto = function(req, res){
 				res.redirect('/gallery/albums/' + req.body.photoalbum);
 			});
 		});
+	});
+};
+
+exports.addpageform = function(req, res){
+	res.render('addpageform', {title: "Add Page", pages: ''});
+};
+
+exports.addpage = function(req, res){
+	var page = {
+		name: req.body.pagename,
+		body: req.body.pagebody,
+		nav: req.body.pagenav
+	};
+	Page.create(page, function(err, page){
+		if (err) res.send(err);
+		console.log(page);
+		res.redirect('/');
 	});
 };

@@ -1,0 +1,47 @@
+extends layout
+
+block append head
+  script(src="/javascripts/tiny_mce/tiny_mce.js")
+  script
+    tinyMCE.init({
+        mode : "textareas",
+        theme : "advanced",
+
+        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect"
+    });
+
+block content
+  div.contentWrapper
+    form(method="POST"
+  	  action="/pages/add"
+  	  enctype="application/x-www-form-urlencoded")
+      div.pad-left.pad-right.grey.margin-bottom
+        h1 Name
+        input.input-block-level(type="text"
+    	  name="pagename"
+    	  id="pagename"
+    	  placeholder="Name..."
+    	  cols="1"
+    	  rows="1")
+      div.pad-left.pad-right.pad-bottom.grey.margin-bottom
+        label.radio True
+          input(type="radio"
+            name="pagenav"
+            id="pagenav1"
+            value="true")
+        label.radio False
+          input(type="radio"
+            name="pagenav"
+            id="pagenav2"
+            value="false")
+      div.pad-left.pad-right.pad-bottom.grey.margin-bottom
+        h3 Body
+        textarea.input-block-level(type="text"
+    	  name="pagebody"
+    	  id="pagebody"
+    	  rows="7")
+      div
+        input.btn(type="submit"
+    	  name="submit"
+    	  id="submit"
+    	  value="Save")
