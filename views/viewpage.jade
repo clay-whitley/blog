@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  div.contentWrapper
+    div.page-header
+      h1 #{page.name}
+    div!= page.body

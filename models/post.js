@@ -7,6 +7,8 @@ var Post = new Schema({
 	sn: String
 	, title : String
 	, category: String
+	, author: String
+	, date: { type: Date, default: Date.now }
 	, desc: String
 	, body: String
 });

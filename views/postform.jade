@@ -37,11 +37,11 @@ block content
             each cat in cats
               option(value="#{cat.name}") #{cat.name}
       div.pad-left.pad-right.pad-bottom.grey.margin-bottom
-        h3 Description
-        textarea.input-block-level(type="text"
-    	  name="postdesc"
-    	  id="postdesc"
-    	  rows="3")
+        h3 Author
+        input.input-block-level(type="text"
+    	  name="postauthor"
+    	  id="postauthor"
+    	  rows="1")
       div.pad-left.pad-right.pad-bottom.grey.margin-bottom
         h3 Body
         textarea.input-block-level(type="text"

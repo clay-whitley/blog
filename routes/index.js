@@ -6,6 +6,13 @@ var Photo = require('../models/photo.js');
 var Page = require('../models/page.js');
 
 var fs = require('fs');
+var pkgcloud = require('pkgcloud');
+
+// var amazon = pkgcloud.storage.createClient({
+//   provider: 'amazon', // 'aws', 's3'
+//   keyId: 'AKIAJNHU6XS2MH42D6LQ',
+//   key: 'LSzXWeQLSoSaHRVfdAxfi8Cf8eLtaaVqtsliJDRk'
+// });
 /*
  * GET home page.
  */
@@ -92,11 +99,14 @@ exports.addpost = function(req, res){
 	Post.count({}, function(err, count){
 		console.log(count);
 		var sn = count + 1;
+			var date = new Date();
 			var post = {
 				sn: sn
 				, title: req.body.posttitle
 				, category: req.body.postcategory || req.body.postcatchoice
-				, desc: req.body.postdesc
+				, author: req.body.postauthor
+				, desc: req.body.postbody.substring(0, 750)
+				, date: date
 				, body: req.body.postbody
 			};
 			var postObj = new Post(post);
@@ -236,28 +246,34 @@ exports.addphoto = function(req, res){
 	var tmp_path = req.files.photofile.path;
 	var target_path = __dirname + '/../public/uploads/' + req.files.photofile.name;
 	console.log(req.files);
-	fs.readFile(tmp_path, function(err, data){
+	fs.createReadStream(tmp_path).pipe(amazon.upload({
+		container: 'claywhitley-development',
+		remote: 'test.jpg'
+	}, function(err){
 		if (err) res.send(err);
-		console.log(data);
-		fs.writeFile(target_path, data, function(err){
-			if (err) res.send(err);
-			console.log(target_path);
-			var photo = {
-				name: req.body.photoname,
-				file: '/uploads/' + req.files.photofile.name,
-				album: req.body.photoalbum
-			};
-			fs.unlink(tmp_path, function(){
-				if (err) res.send(err);
-				console.log('successfully unlinked');
-			});
-			Photo.create(photo, function(err,photo){
-				if (err) res.send(err);
-				console.log(photo);
-				res.redirect('/gallery/albums/' + req.body.photoalbum);
-			});
-		});
-	});
+	}));
+	// fs.readFile(tmp_path, function(err, data){
+	// 	if (err) res.send(err);
+	// 	console.log(data);
+	// 	fs.writeFile(target_path, data, function(err){
+	// 		if (err) res.send(err);
+	// 		console.log(target_path);
+	// 		var photo = {
+	// 			name: req.body.photoname,
+	// 			file: '/uploads/' + req.files.photofile.name,
+	// 			album: req.body.photoalbum
+	// 		};
+	// 		fs.unlink(tmp_path, function(){
+	// 			if (err) res.send(err);
+	// 			console.log('successfully unlinked');
+	// 		});
+	// 		Photo.create(photo, function(err,photo){
+	// 			if (err) res.send(err);
+	// 			console.log(photo);
+	// 			res.redirect('/gallery/albums/' + req.body.photoalbum);
+	// 		});
+	// 	});
+	// });
 };
 
 exports.addpageform = function(req, res){
@@ -274,5 +290,12 @@ exports.addpage = function(req, res){
 		if (err) res.send(err);
 		console.log(page);
 		res.redirect('/');
+	});
+};
+
+exports.viewpage = function(req, res){
+	Page.findOne({_id: req.params.id}, function(err, page){
+		if (err) res.send(err);
+		res.render('viewpage', {title: page.name, page: page, pages: ''});
 	});
 };

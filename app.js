@@ -62,6 +62,7 @@ app.get('/gallery/:id/add', routes.addphotoform);
 app.post('/gallery/images/add', routes.addphoto);
 app.get('/pages/add', routes.addpageform);
 app.post('/pages/add', routes.addpage);
+app.get('/pages/:id', routes.viewpage);
 app.get('/:test', routes.test);
 app.get('/users', user.list);
 
