@@ -9,4 +9,6 @@ block content
         p #{post.date}
     div!= post.body
     br
-    a.btn.btn-inverse(href="/blog/#{post.sn}/edit") Edit
+    if loggedin
+      a.btn.btn-inverse(href="/blog/#{post.id}/edit") Edit
+      a.btn.btn-inverse(href="/blog/#{post.id}/delete") Delete

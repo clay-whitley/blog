@@ -4,8 +4,7 @@ var ObjectId = Schema.ObjectId;
 
 
 var Post = new Schema({
-	sn: String
-	, title : String
+	title : String
 	, category: String
 	, author: String
 	, date: { type: Date, default: Date.now }

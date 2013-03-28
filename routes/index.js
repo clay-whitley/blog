@@ -20,7 +20,7 @@ var pkgcloud = require('pkgcloud');
 exports.index = function(req, res){
 	Post
 	.find({})
-	.sort('-sn')
+	.sort('-date')
 	.exec(function(err, docs){
 		if (err) {
 			res.send(err);
@@ -31,7 +31,7 @@ exports.index = function(req, res){
 					res.send(err);
 				} else {
 					Page.find({nav: "true"}, function(err,pages){
-						res.render('index', {title: 'Index', docs: docs, cats: cats, pages: pages});
+						res.render('index', {title: 'Index', docs: docs, cats: cats, pages: pages, loggedin: req.session.loggedIn});
 					});
 				}
 			});
@@ -77,11 +77,11 @@ exports.logout = function(req, res){
 };
 
 exports.loginform = function(req, res){
-	res.render('login', {title: 'Login', pages: ''});
+	res.render('login', {title: 'Login', pages: '', loggedin: req.session.loggedIn});
 };
 
 exports.registerform = function(req, res){
-	res.render('register', {title: 'Register', pages: ''});
+	res.render('register', {title: 'Register', pages: '', loggedin: req.session.loggedIn});
 };
 
 exports.test = function(req, res){
@@ -91,18 +91,14 @@ exports.test = function(req, res){
 exports.postform = function(req, res){
 	Category.find({}, function(err, cats){
 		if (err) res.send(err);
-		res.render('postform', {title: 'Form', cats: cats, pages: ''});
+		res.render('postform', {title: 'Form', cats: cats, pages: '', loggedin: req.session.loggedIn});
 	});
 };
 
 exports.addpost = function(req, res){
-	Post.count({}, function(err, count){
-		console.log(count);
-		var sn = count + 1;
 			var date = new Date();
 			var post = {
-				sn: sn
-				, title: req.body.posttitle
+				title: req.body.posttitle
 				, category: req.body.postcategory || req.body.postcatchoice
 				, author: req.body.postauthor
 				, desc: req.body.postbody.substring(0, 750)
@@ -128,25 +124,21 @@ exports.addpost = function(req, res){
 								}
 							});
 						} else {
-							console.log('tripp');
 							res.redirect('/');
 						}
 					});
 					
 				}
 			});
-		
-
-	});
 };
 
 exports.viewpost = function(req, res){
-	var sn = req.params.sn;
-	Post.findOne({sn: sn}, function(err, doc){
+
+	Post.findOne({_id: req.params.id}, function(err, doc){
 		if (err) {
 			res.send(err);
 		} else {
-			res.render('viewpost', {title: 'View', post: doc, pages: ''});
+			res.render('viewpost', {title: 'View', post: doc, pages: '', loggedin: req.session.loggedIn});
 		}
 	});
 	
@@ -160,7 +152,7 @@ exports.viewcat = function(req, res){
 			console.log(docs);
 			Category.find({}, function(err, cats){
 				if (err) res.send(err);
-				res.render('index', {title: req.params.cat, docs: docs, cats: cats, pages: ''});
+				res.render('index', {title: req.params.cat, docs: docs, cats: cats, pages: '', loggedin: req.session.loggedIn});
 			});
 			
 		}
@@ -168,29 +160,26 @@ exports.viewcat = function(req, res){
 };
 
 exports.updateform = function(req, res){
-	var sn = req.params.sn;
-	Post.findOne({sn: sn}, function(err, doc){
+	Post.findOne({_id: req.params.id}, function(err, doc){
 		if (err) {
 			res.send(err);
 		} else {
 			Category.find({}, function(err,cats){
 				if (err) res.send(err);
-				res.render('updateform', {title: 'Update', post: doc, cats: cats, pages: ''});
+				res.render('updateform', {title: 'Update', post: doc, cats: cats, pages: '', loggedin: req.session.loggedIn});
 			});
 		}
 	});
 };
 
 exports.updatepost = function(req, res){
-	var sn = req.params.sn;
 	var post = {
-		sn: sn
-		, title: req.body.posttitle
+		title: req.body.posttitle
 		, category: req.body.postcategory || req.body.postcatchoice
 		, desc: req.body.postdesc
 		, body: req.body.postbody
 	};
-	Post.update({sn: sn}, post, function(err){
+	Post.update({_id: req.params.id}, post, function(err){
 		if (err) {
 			res.send(err);
 		} else {
@@ -199,15 +188,22 @@ exports.updatepost = function(req, res){
 	});
 };
 
+exports.deletepost = function(req, res){
+	Post.remove({_id: req.params.id}, function(err){
+		if (err) res.send(err);
+		res.redirect('/');
+	});
+};
+
 exports.viewalbums = function(req, res){
 	Album.find({}, function(err, albums){
 		if (err) res.send(err);
-		res.render('viewalbums', {title: 'Albums', albums: albums, pages: ''});
+		res.render('viewalbums', {title: 'Albums', albums: albums, pages: '', loggedin: req.session.loggedIn});
 	});
 };
 
 exports.addalbumform = function(req, res){
-	res.render('addalbumform', {title: 'Add Album', pages: ''});
+	res.render('addalbumform', {title: 'Add Album', pages: '', loggedin: req.session.loggedIn});
 };
 
 exports.addalbum = function(req, res){
@@ -229,7 +225,7 @@ exports.viewalbum = function(req, res){
 		Photo.find({album: album.id}, function(err,photos){
 			if (err) res.send(err);
 			console.log(photos);
-			res.render('viewalbum', {title: album.name, album: album, photos: photos, pages: ''});
+			res.render('viewalbum', {title: album.name, album: album, photos: photos, pages: '', loggedin: req.session.loggedIn});
 		});
 		
 	});
@@ -238,7 +234,7 @@ exports.viewalbum = function(req, res){
 exports.addphotoform = function(req, res){
 	Album.findOne({_id: req.params.id}, function(err,album){
 		if (err) res.send(err);
-		res.render('addphotoform', {title: "Add Photo", album: album, pages: ''});
+		res.render('addphotoform', {title: "Add Photo", album: album, pages: '', loggedin: req.session.loggedIn});
 	});
 };
 
@@ -277,7 +273,7 @@ exports.addphoto = function(req, res){
 };
 
 exports.addpageform = function(req, res){
-	res.render('addpageform', {title: "Add Page", pages: ''});
+	res.render('addpageform', {title: "Add Page", pages: '', loggedin: req.session.loggedIn});
 };
 
 exports.addpage = function(req, res){
@@ -296,6 +292,6 @@ exports.addpage = function(req, res){
 exports.viewpage = function(req, res){
 	Page.findOne({_id: req.params.id}, function(err, page){
 		if (err) res.send(err);
-		res.render('viewpage', {title: page.name, page: page, pages: ''});
+		res.render('viewpage', {title: page.name, page: page, pages: '', loggedin: req.session.loggedIn});
 	});
 };
