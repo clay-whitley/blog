@@ -4,8 +4,10 @@ block header
   header#header
     h1.pull-left#headertitle #{title}
     div.pad-right.pad-top.pull-right.dropdown(style="margin-right:50px;")
-      a.dropdown-toggle(href="#",data-toggle="dropdown")
-        img.img-rounded(src="http://placehold.it/50x50")
+      a.btn.btn-success(href="/blog/add",style="margin-right:10px;") Add Blog Post
+      a.btn.dropdown-toggle(href="#",data-toggle="dropdown")
+        span Categories 
+        span.caret
       ul.dropdown-menu(role="menu")
         li
           a(href="/logout") Logout
@@ -18,10 +20,16 @@ block content
   if docs.length
     each doc in docs
       div.indexentry
+        div.indexdate
+          - var lineOne = String(doc.date).substring(4,7);
+          - var lineTwo = String(doc.date).substring(7,10)
+          h4= lineOne
+          h5= lineTwo
         div.postpreview.pull-left
           h1 #{doc.title}
-          h4 Placeholder Description
-          a.btn.btn-primary(href="/blog/#{doc.id}") View
+          div!= doc.desc
+          div.clearfix
         div.pull-left
-          img.img-rounded(src="http://placehold.it/150x150")
-  a.btn.btn-success(href="/blog/add") Add Blog Post
+          a(href="/blog/#{doc.id}")
+            img(src="/images/select_arrows.png")
+  

@@ -26,16 +26,13 @@ exports.index = function(req, res){
 			res.send(err);
 		} else {
 			console.log(req.session);
-			Category.find({}, function(err,cats){
-				if (err) {
-					res.send(err);
-				} else {
-					Page.find({nav: "true"}, function(err,pages){
-						res.render('index', {title: 'Index', docs: docs, cats: cats, pages: pages, loggedin: req.session.loggedIn});
-					});
-				}
-			});
-			
+			Category.$where('this.name.length > 0;')
+			.exec(function(err, cats){
+				if (err) res.send(err);
+				Page.find({nav: "true"}, function(err,pages){
+					res.render('index', {title: 'Index', docs: docs, cats: cats, pages: pages, loggedin: req.session.loggedIn});
+				});
+			}); 
 		}
 	});
 };
@@ -101,7 +98,7 @@ exports.addpost = function(req, res){
 				title: req.body.posttitle
 				, category: req.body.postcategory || req.body.postcatchoice
 				, author: req.body.postauthor
-				, desc: req.body.postbody.substring(0, 750)
+				, desc: req.body.postbody
 				, date: date
 				, body: req.body.postbody
 			};
@@ -150,9 +147,12 @@ exports.viewcat = function(req, res){
 			res.send(err);
 		} else {
 			console.log(docs);
-			Category.find({}, function(err, cats){
+			Category.$where('this.name.length > 0;')
+			.exec(function(err, cats){
 				if (err) res.send(err);
-				res.render('index', {title: req.params.cat, docs: docs, cats: cats, pages: '', loggedin: req.session.loggedIn});
+				Page.find({nav: "true"}, function(err,pages){
+					res.render('index', {title: req.params.cat, docs: docs, cats: cats, pages: pages, loggedin: req.session.loggedIn});
+				});
 			});
 			
 		}

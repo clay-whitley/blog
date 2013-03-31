@@ -11,25 +11,27 @@ html
     block header
       header#header
         h1.pull-left#headertitle #{title}
-        div.pad-right.pad-top.pull-right.dropdown(style="margin-right:50px;")
-          a.dropdown-toggle(href="#",data-toggle="dropdown")
-            img.img-rounded(src="http://placehold.it/50x50")
-          ul.dropdown-menu(role="menu")
-            li
-              a(href="/logout") Logout
+        if loggedin
+          div.pad-right.pad-top.pull-right.dropdown(style="margin-right:50px;")
+            a.btn.dropdown-toggle(href="#",data-toggle="dropdown")
+              span Menu 
+              span.caret
+            ul.dropdown-menu(role="menu")
+              li
+                a(href="/logout") Logout
     section#sidebar
-      div.pad
+      div.pad(style="text-align:center;")
         img.img-rounded(src="http://placehold.it/275x275")
       div.sidebarnav
-        ul.nav.nav-pills.nav-stacked
-          li.active
+        div
+          div.well.well-small
             a(href="/") Blog
-          li
+          div.well.well-small
             a(href="/login") Login
-          li
+          div.well.well-small
             a(href="/gallery/albums") Gallery
           each page in pages
-            li
+            div.well.well-small
               a(href="/pages/#{page.id}") #{page.name}
         if loggedin
           a.btn(href="/pages/add") Add Page

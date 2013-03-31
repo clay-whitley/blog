@@ -56,6 +56,15 @@ body {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 15px;
+	margin-left: 60px;
+}
+
+.indexdate {
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	width: 40px;
+	margin-left:-50px;
+	float:left;
 }
 
 /*Utility classes*/
@@ -105,6 +114,9 @@ body {
 
 .postpreview {
 	width: 600px;
+	height: 175px;
+	overflow: hidden;
+	margin-right: 20px;
 }
 
 .textbody {
