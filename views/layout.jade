@@ -5,11 +5,14 @@ html
       title= title
       link(rel='stylesheet', href='/stylesheets/style.css')
       link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+      link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
       script(src="http://code.jquery.com/jquery.js")
       script(src='/javascripts/bootstrap.js')
+      meta(name="viewport",content="width=device-width, initial-scale=1.0")
+
   body
     block header
-      header#header
+      div#header
         h1.pull-left#headertitle #{title}
         if loggedin
           div.pad-right.pad-top.pull-right.dropdown(style="margin-right:50px;")
@@ -19,22 +22,26 @@ html
             ul.dropdown-menu(role="menu")
               li
                 a(href="/logout") Logout
-    section#sidebar
-      div.pad(style="text-align:center;")
-        img.img-rounded(src="http://placehold.it/275x275")
-      div.sidebarnav
+    div.container(style="margin-top:55px;")
+      div.row
         div
-          div.well.well-small
-            a(href="/") Blog
-          div.well.well-small
-            a(href="/login") Login
-          div.well.well-small
-            a(href="/gallery/albums") Gallery
-          each page in pages
-            div.well.well-small
-              a(href="/pages/#{page.id}") #{page.name}
-        if loggedin
-          a.btn(href="/pages/add") Add Page
-    section#content
-      block content
+          div#sidebar.span3
+            div(style="text-align:center;")
+              img.img-rounded(src="http://placehold.it/200x200")
+            div.sidebarnav
+              div
+                div.well.well-small
+                  a(href="/") Blog
+                div.well.well-small
+                  a(href="/login") Login
+                div.well.well-small
+                  a(href="/gallery/albums") Gallery
+                each page in pages
+                  div.well.well-small
+                    a(href="/pages/#{page.id}") #{page.name}
+              if loggedin
+                a.btn(href="/pages/add") Add Page
+        div.span9.offset3
+          div#content
+            block content
     

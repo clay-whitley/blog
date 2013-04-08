@@ -804,6 +804,9 @@
     padding-right: 20px;
     padding-left: 20px;
   }
+  #sidebar{
+    position: relative;
+  }
   .navbar-fixed-top,
   .navbar-fixed-bottom,
   .navbar-static-top {

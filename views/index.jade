@@ -1,7 +1,7 @@
 extends layout
 
 block header
-  header#header
+  div#header
     h1.pull-left#headertitle #{title}
     div.pad-right.pad-top.pull-right.dropdown(style="margin-right:50px;")
       a.btn.btn-success(href="/blog/add",style="margin-right:10px;") Add Blog Post
@@ -19,17 +19,16 @@ block header
 block content
   if docs.length
     each doc in docs
-      div.indexentry
-        div.indexdate
-          - var lineOne = String(doc.date).substring(4,7);
-          - var lineTwo = String(doc.date).substring(7,10)
-          h4= lineOne
-          h5= lineTwo
-        div.postpreview.pull-left
-          h1 #{doc.title}
-          div!= doc.desc
-          div.clearfix
-        div.pull-left
-          a(href="/blog/#{doc.id}")
-            img(src="/images/select_arrows.png")
+      div.row
+        div.indexentry.span9
+          div.postpreview
+            - var lineOne = String(doc.date).substring(4,7);
+            - var lineTwo = String(doc.date).substring(7,10);
+            - var lineThree = lineOne + " " + lineTwo;
+            h4= lineThree
+            h1 #{doc.title}
+            h4(style="color:#999;") #{doc.author}
+            div!= doc.desc
+            div.clearfix
+          a.btn(href="/blog/#{doc.id}") View Post
   

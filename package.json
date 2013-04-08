@@ -1,6 +1,6 @@
 {
   "name": "Blog",
-  "version": "0.0.1-21",
+  "version": "0.0.1-24",
   "private": true,
   "scripts": {
     "start": "app.js"
@@ -14,5 +14,9 @@
   "engines": {
     "node": "0.8.x"
   },
-  "subdomain": "claywhitley.stagingblog"
+  "subdomain": "claywhitley.stagingblog",
+  "domains": [
+    "claywhitley.com",
+    "www.claywhitley.com"
+  ]
 }

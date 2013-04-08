@@ -11,7 +11,7 @@ body {
 	width: auto;
 	margin: 0 auto;
 	clear: both;
-	height: 75px;
+	height: 50px;
 	border-bottom: 1px solid #e8e8e8;
 	background-image: url(/images/wild_oliva.png);
 	z-index: 10;
@@ -24,19 +24,14 @@ body {
 
 #sidebar {
 	position: fixed;
-	left: 0;
-	top: 76px;
+	top: 56px;
 	bottom: 0;
-	width: 27%;
-	right: auto;
 	z-index: 1;
 	border-right: 1px solid #e8e8e8;
 	background-image: url(/images/honey_im_subtle.png);
 }
 
 #content {
-	margin-left: 28%;
-	margin-top: 76px;
 	display: block;
 	position: relative;
 	background-color: #fff;
@@ -55,8 +50,6 @@ body {
 	border-bottom: 1px solid #e8e8e8;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	padding-left: 15px;
-	margin-left: 60px;
 }
 
 .indexdate {
@@ -113,7 +106,6 @@ body {
 }
 
 .postpreview {
-	width: 600px;
 	height: 175px;
 	overflow: hidden;
 	margin-right: 20px;
