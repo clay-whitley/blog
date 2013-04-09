@@ -12,8 +12,7 @@ body {
 	margin: 0 auto;
 	clear: both;
 	height: 50px;
-	border-bottom: 1px solid #e8e8e8;
-	background-image: url(/images/wild_oliva.png);
+	background-color: #000;
 	z-index: 10;
 	color: #ffffff;
 }
@@ -24,7 +23,7 @@ body {
 
 #sidebar {
 	position: fixed;
-	top: 56px;
+	top: 50px;
 	bottom: 0;
 	z-index: 1;
 	border-right: 1px solid #e8e8e8;
@@ -117,8 +116,6 @@ body {
 }
 
 .sidebarnav {
-	position: absolute;
-	bottom:15px;
 	width: 80%;
 	margin-left: 10%;
 }

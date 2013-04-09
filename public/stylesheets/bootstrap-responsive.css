@@ -806,6 +806,12 @@
   }
   #sidebar{
     position: relative;
+    top:0px;
+  }
+  .sidebarnavitem{
+    float:left;
+    width: 40%;
+    margin-left:2.5%;
   }
   .navbar-fixed-top,
   .navbar-fixed-bottom,

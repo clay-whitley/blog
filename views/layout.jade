@@ -10,7 +10,7 @@ html
       script(src='/javascripts/bootstrap.js')
       meta(name="viewport",content="width=device-width, initial-scale=1.0")
 
-  body
+  body(style="background-image:url(/images/mochaGrunge.png);")
     block header
       div#header
         h1.pull-left#headertitle #{title}
@@ -22,23 +22,22 @@ html
             ul.dropdown-menu(role="menu")
               li
                 a(href="/logout") Logout
-    div.container(style="margin-top:55px;")
+    div.container(style="margin-top:50px;box-shadow: rgba(0,0,0,.2) 0 3px 5px;background-color:#fff;")
       div.row
         div
           div#sidebar.span3
             div(style="text-align:center;")
               img.img-rounded(src="http://placehold.it/200x200")
+            div(style="margin-left:10%;")
+              h2 Clay Whitley
+              p Lorem ipsum lit dolet
             div.sidebarnav
               div
-                div.well.well-small
+                div.sidebarnavitem.well.well-small
                   a(href="/") Blog
-                div.well.well-small
-                  a(href="/login") Login
-                div.well.well-small
+                div.sidebarnavitem.well.well-small
                   a(href="/gallery/albums") Gallery
-                each page in pages
-                  div.well.well-small
-                    a(href="/pages/#{page.id}") #{page.name}
+                div.clearfix
               if loggedin
                 a.btn(href="/pages/add") Add Page
         div.span9.offset3
