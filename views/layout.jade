@@ -1,5 +1,5 @@
 doctype 5
-html
+html(style="height:100%;")
   head
     block head
       title= title
@@ -10,7 +10,7 @@ html
       script(src='/javascripts/bootstrap.js')
       meta(name="viewport",content="width=device-width, initial-scale=1.0")
 
-  body(style="background-image:url(/images/mochaGrunge.png);")
+  body(style="background-image:url(/images/mochaGrunge.png); height:100%;")
     block header
       div#header
         h1.pull-left#headertitle #{title}
@@ -22,7 +22,7 @@ html
             ul.dropdown-menu(role="menu")
               li
                 a(href="/logout") Logout
-    div.container(style="margin-top:50px;box-shadow: rgba(0,0,0,.2) 0 3px 5px;background-color:#fff;")
+    div.container(style="box-shadow: rgba(0,0,0,.2) 0 3px 5px;background-color:#fff; height:100%;")
       div.row
         div
           div#sidebar.span3
