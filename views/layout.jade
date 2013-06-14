@@ -1,5 +1,5 @@
 doctype 5
-html(style="height:100%;")
+html
   head
     block head
       title= title
@@ -22,25 +22,27 @@ html(style="height:100%;")
             ul.dropdown-menu(role="menu")
               li
                 a(href="/logout") Logout
-    div.container(style="box-shadow: rgba(0,0,0,.2) 0 3px 5px;background-color:#fff; height:100%;")
+    div.container(style="box-shadow: rgba(0,0,0,.2) 0 3px 5px;background-color:#fff; min-height:100%;")
+      div.container(style="position:fixed;background-color:#fff;height:100%;")
       div.row
         div
           div#sidebar.span3
-            div(style="text-align:center;")
-              img.img-rounded(src="http://placehold.it/200x200")
-            div(style="margin-left:10%;")
+            div(style="text-align:center; margin-top:10px;")
+              img.img-rounded(src="/images/clay_photo.jpg",style="width:200px; height:200px;")
+            div(style="margin-left:10%;margin-right:10%")
               h2 Clay Whitley
-              p Lorem ipsum lit dolet
+              p I'm a front end web developer from Boston, who's attending Dev Bootcamp in San Francisco to learn the way of Ruby on Rails. This site's purpose is to chronicle what I learn on my journey to become a software developer.
             div.sidebarnav
               div
-                div.sidebarnavitem.well.well-small
+                div.well.well-small
                   a(href="/") Blog
-                div.sidebarnavitem.well.well-small
-                  a(href="/gallery/albums") Gallery
                 div.clearfix
               if loggedin
                 a.btn(href="/pages/add") Add Page
+              if loggedin
+                a.btn(href="/blog/add") Add Post
         div.span9.offset3
           div#content
             block content
+      div.clearfix
     
