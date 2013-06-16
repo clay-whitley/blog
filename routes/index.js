@@ -30,7 +30,7 @@ exports.index = function(req, res){
 			.exec(function(err, cats){
 				if (err) res.send(err);
 				Page.find({nav: "true"}, function(err,pages){
-					res.render('index', {title: 'Index', docs: docs, cats: cats, pages: pages, loggedin: req.session.loggedIn});
+					res.render('index', {title: 'Clay Whitley | Blog', docs: docs, cats: cats, pages: pages, loggedin: req.session.loggedIn});
 				});
 			}); 
 		}
@@ -88,7 +88,7 @@ exports.test = function(req, res){
 exports.postform = function(req, res){
 	Category.find({}, function(err, cats){
 		if (err) res.send(err);
-		res.render('postform', {title: 'Form', cats: cats, pages: '', loggedin: req.session.loggedIn});
+		res.render('postform', {title: 'Clay Whitley | Blog', cats: cats, pages: '', loggedin: req.session.loggedIn});
 	});
 };
 
@@ -135,7 +135,7 @@ exports.viewpost = function(req, res){
 		if (err) {
 			res.send(err);
 		} else {
-			res.render('viewpost', {title: 'View', post: doc, pages: '', loggedin: req.session.loggedIn});
+			res.render('viewpost', {title: 'Clay Whitley | Blog', post: doc, pages: '', loggedin: req.session.loggedIn});
 		}
 	});
 	
@@ -292,6 +292,6 @@ exports.addpage = function(req, res){
 exports.viewpage = function(req, res){
 	Page.findOne({_id: req.params.id}, function(err, page){
 		if (err) res.send(err);
-		res.render('viewpage', {title: page.name, page: page, pages: '', loggedin: req.session.loggedIn});
+		res.render('viewpage', {title: 'Clay Whitley | Blog', page: page, pages: '', loggedin: req.session.loggedIn});
 	});
 };

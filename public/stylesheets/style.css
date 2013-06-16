@@ -121,3 +121,6 @@ body {
 	margin-left: 10%;
 }
 
+.postpreview h4, .postpreview h1 {
+	margin: 0px;
+}

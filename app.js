@@ -43,8 +43,8 @@ app.configure('development', function(){
 // Routes
 
 app.get('/', routes.index);
-app.get('/signup', routes.registerform);
-app.post('/signup', routes.adduser);
+// app.get('/signup', routes.registerform);
+// app.post('/signup', routes.adduser);
 app.get('/login', routes.loginform);
 app.post('/login', routes.login);
 app.get('/logout', routes.logout);
